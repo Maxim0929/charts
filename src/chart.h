@@ -7,15 +7,32 @@ private:
 
     int left;
     int right;
-    float min;
-    float max;
+    double PrMin;
+    double PrMax;
+    size_t size;
 
-    Interval candlesInterval;
+    float candleWidth;
+    float candleHeight;
+
+    float topBottomSpace;
+
+    float space;
 public:
+
+
     Chart();
-    Chart(int left, int right, float min, float max);
+    Chart(time_t left, time_t right, float PrMin, float PrMax);
 
     ~Chart();
+
+
+    void initCandle(float prices[], RenderWindow& window);
+    void setCandlePos(RenderWindow& window);
+    void draw(RenderWindow& window);
+
+    void newChart(float prices[], RenderWindow& window, time_t left, time_t right, float PrMin, float PrMax);
+
+
 
     void resizeX(int left, int right);
     void resizeY(float min, float max);

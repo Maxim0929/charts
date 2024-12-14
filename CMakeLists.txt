@@ -16,6 +16,9 @@ set(CURL_DIR "D:/projects/c++_libraries/LIB/curl/lib/cmake/CURL")
 
 find_package(CURL REQUIRED)
 
+#nlohmann
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
 
 add_executable(${PROJECT_NAME} src/main.cpp src/candle.cpp src/chart.cpp)
 
@@ -26,3 +29,4 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${SFML_INCLUDE_DIRS})
 
 #CURL
 target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
+

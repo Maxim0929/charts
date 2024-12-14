@@ -2,12 +2,15 @@
 
 
 // constructors
-Candle::Candle() : open(0), close(0), min(0), max(0), width(0), height(0), interval(Interval::HOUR){}
+Candle::Candle() : open(0), close(0), width(0), height(0){}
 
-Candle::Candle(float open, float close, float min, float max) : 
-open(open), close(close), min(min), max(max), width(0), height(0), interval(Interval::HOUR){
-    line.setSize(Vector2f(1, max - min));
-    body.setSize(Vector2f(10, abs(close - open)));
+Candle::Candle(float open, float close) : 
+open(open), close(close), width(0), height(0){
+
+    body.setSize(Vector2f(width, height));
+    body.setOrigin(Vector2f(0, 0));
+    if(open > close) body.setFillColor(Color(187, 13, 13));
+    else body.setFillColor(Color(13, 187, 13));
 }
 
 
@@ -15,23 +18,36 @@ open(open), close(close), min(min), max(max), width(0), height(0), interval(Inte
 float Candle::getOpen(){ return open;}
 float Candle::getClose(){ return close;}
 
-float Candle::getMin(){ return min;}
-float Candle::getMax(){ return max;}
-
 float Candle::getWidth(){ return width;}
 float Candle::getHeight(){ return height;}
 
+RectangleShape& Candle::getBody(){return body; }
+
 
 //seters
-void Candle::setOpen(float open){ this->open = open;}
-void Candle::setClose(float close){ this->close = close;}
+void Candle::setOpen(float open){ 
+    this->open = open;
+    if(open > close) body.setFillColor(Color(187, 13, 13));
+    else body.setFillColor(Color(13, 187, 13));
+}
+void Candle::setClose(float close){ 
+    this->close = close;
+    if(open > close) body.setFillColor(Color(187, 13, 13));
+    else body.setFillColor(Color(13, 187, 13));
+}
 
-void Candle::setMin(float min){ this->min = min;}
-void Candle::setMax(float max){ this->max = max;}
+void Candle::setWidth(float width){ 
+    this->width = width;
+    body.setSize(Vector2f(width, height));
+}
+void Candle::setHeight(float height){ 
+    this->height = height;
+    body.setSize(Vector2f(width, height)); 
+}
 
-void Candle::setWidth(float width){ this->width = width;}
-void Candle::setHeight(float height){ this->height = height;}
-
+void Candle::setPos(float x, float y){
+    body.setPosition(x, y);
+}
 
 // other
 float Candle::relativeChange(){
@@ -40,4 +56,6 @@ float Candle::relativeChange(){
 float Candle::absuluteChange(){
     return 0;
 }
+
+
 

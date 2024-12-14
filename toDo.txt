@@ -1,0 +1,3 @@
+- include json
+- implement function 
+float getPrice(string name, time_t unixTime = 0, string YmdHMSTime = "", string vs_currency=usd)
